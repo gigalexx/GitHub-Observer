@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
             fragmentManager
                     .beginTransaction()
                     .replace(R.id.frameContainer, new Login_Fragment(),
-                            Utils.Login_Fragment).commit();
+                            Utils.LOGIN_FRAGMENT_TAG).commit();
         }
 
         // On close icon click finish activity
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 .beginTransaction()
                 .setCustomAnimations(R.anim.left_enter, R.anim.right_out)
                 .replace(R.id.frameContainer, new Login_Fragment(),
-                        Utils.Login_Fragment).commit();
+                        Utils.LOGIN_FRAGMENT_TAG).commit();
     }
+
+
 }

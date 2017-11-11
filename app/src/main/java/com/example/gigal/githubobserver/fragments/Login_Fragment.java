@@ -3,6 +3,7 @@ package com.example.gigal.githubobserver.fragments;
 import android.annotation.SuppressLint;
 import android.content.res.ColorStateList;
 import android.content.res.XmlResourceParser;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,7 +20,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.example.gigal.githubobserver.R;
 import com.example.gigal.githubobserver.Utils;
@@ -94,8 +94,8 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
                     public void onCheckedChanged(CompoundButton button,
                                                  boolean isChecked) {
 
-                        // If it is checkec then show password else hide
-                        // password
+                        // If it is checked then show password
+                        // else hide password
                         if (isChecked) {
 
                             show_hide_password.setText(R.string.hide_pwd);// change
@@ -138,7 +138,7 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
         String getPassword = password.getText().toString();
 
         // Check patter for email id
-        Pattern p = Pattern.compile(Utils.regExEmailValidator);
+        Pattern p = Pattern.compile(Utils.REG_EX_EMAIL_VALIDATOR);
 
         Matcher m = p.matcher(getEmailId);
 
@@ -148,12 +148,15 @@ public class Login_Fragment extends Fragment implements View.OnClickListener {
             loginLayout.startAnimation(shakeAnimation);
             new CustomToast().Show_Toast(getActivity(), view,
                     "Enter both credentials.");
+            return;
 
         }
         // Check if email id is valid or not
-        else if (!m.find())
+        else if (!m.find()) {
             new CustomToast().Show_Toast(getActivity(), view,
-                    "Your Email Id is Invalid.");
+                    "Email is invalid");
+            return;
+        }
     }
 
 }
